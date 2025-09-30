@@ -1,0 +1,173 @@
+:root {
+    --primary-bg: #0a192f;
+    --secondary-bg: #172a45;
+    --accent-color: #4cc9f0;
+    --accent-secondary: #7209b7;
+    --text-primary: #e6f1ff;
+    --text-secondary: #8892b0;
+    --glass-effect: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --success-color: #4ade80;
+    --warning-color: #f59e0b;
+    --error-color: #f87171;
+    --hover-btn: #3aa8d8;
+}
+
+/*Estilos base de la barra de navegación*/
+.navbar {
+  background: var(--glass-effect);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  font-family: "Orbitron", sans-serif;
+  padding: 1rem 0;
+}
+
+/* Fondo del contenedor dentro de la barra de navegación */
+.navbar .container {
+  background-color: var(--primary-bg);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  margin: 0 auto;
+}
+
+/* Logo (*/
+.logo {
+  color: var(--text-primary);
+  font-weight: bold;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  text-decoration: none;
+  justify-content: center;
+  margin: 20px;
+}
+
+.logo-part:last-child {
+  color: var(--accent-color);
+}
+
+/*Enlaces de navegación */
+.navbar .nav-link {
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+  font-weight: 500;
+
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: var(--accent-color);
+}
+
+.nav-link::selection{
+    border: none;
+}
+
+/*Menú desplegable (categorías) */
+.dropdown-menu {
+  background-color: var(--secondary-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dropdown-item {
+  color: var(--text-secondary);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dropdown-item:hover {
+  background-color: var(--glass-effect);
+  color: var(--accent-color);
+}
+
+.btn {
+  border: 1px solid var(--accent-color);
+}
+
+/*Botón de carrito mejorado*/
+.cart-button {
+  position: relative;
+  background: linear-gradient(135deg, var(--glass-effect), rgba(76, 201, 240, 0.1));
+  border: 2px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
+  color: var(--accent-color);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.cart-button:hover {
+  background: linear-gradient(135deg, rgba(76, 201, 240, 0.2), rgba(76, 201, 240, 0.1));
+  border-color: var(--accent-color);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(76, 201, 240, 0.3);
+}
+
+.cart-button i {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.cart-button:hover i {
+  transform: scale(1.1);
+}
+
+/*Contador del carrito (badge) mejorado*/
+#cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: linear-gradient(135deg, #ff4444, #ff6666);
+  color: white;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 2px solid var(--primary-bg);
+  box-shadow: 0 2px 8px rgba(255, 68, 68, 0.4);
+  animation: pulse 2s infinite;
+  transition: all 0.3s ease;
+}
+
+#cart-count.hidden {
+  display: none;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/*Botón de registro mejorado*/
+.btn-light {
+  background: linear-gradient(135deg, var(--accent-color), var(--hover-btn));
+  color: var(--primary-bg);
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+}
+
+.btn-light:hover {
+  background: linear-gradient(135deg, var(--hover-btn), var(--accent-color));
+  color: var(--primary-bg);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(76, 201, 240, 0.5);
+}
+
