@@ -1,0 +1,352 @@
+/* Variables para el modal del perfil */
+:root {
+    --profile-modal-bg: rgba(10, 25, 47, 0.95);
+    --profile-card-bg: rgba(23, 42, 69, 0.9);
+    --profile-accent: #4cc9f0;
+    --profile-text: #e6f1ff;
+    --profile-text-secondary: #8892b0;
+    --profile-border: rgba(255, 255, 255, 0.1);
+    --profile-danger: #f87171;
+    --profile-success: #4ade80;
+}
+
+/* Overlay del modal del perfil */
+.profile-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--profile-modal-bg);
+    backdrop-filter: blur(10px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 2rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.profile-modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Contenido del modal del perfil */
+.profile-modal-content {
+    background: var(--profile-card-bg);
+    border: 1px solid var(--profile-border);
+    border-radius: 20px;
+    width: 400px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(20px);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.profile-modal-overlay.show .profile-modal-content {
+    transform: translateX(0);
+}
+
+/* Botón de cerrar */
+.profile-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--profile-text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.profile-modal-close:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--profile-text);
+    transform: rotate(90deg);
+}
+
+/* Header del modal */
+.profile-modal-header {
+    text-align: center;
+    padding: 2rem 2rem 1rem;
+    border-bottom: 1px solid var(--profile-border);
+}
+
+.profile-avatar {
+    margin-bottom: 1rem;
+}
+
+.profile-avatar i {
+    font-size: 4rem;
+    color: var(--profile-accent);
+    background: linear-gradient(135deg, var(--profile-accent), #7209b7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.profile-modal-header h2 {
+    color: var(--profile-text);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.profile-modal-header p {
+    color: var(--profile-accent);
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 500;
+}
+
+/* Cuerpo del modal */
+.profile-modal-body {
+    padding: 1.5rem 2rem;
+}
+
+.profile-info-section,
+.profile-stats-section {
+    margin-bottom: 2rem;
+}
+
+.profile-info-section h3,
+.profile-stats-section h3 {
+    color: var(--profile-text);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.profile-info-section h3 i,
+.profile-stats-section h3 i {
+    color: var(--profile-accent);
+}
+
+/* Items de información */
+.profile-info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.profile-info-item:last-child {
+    border-bottom: none;
+}
+
+.profile-info-item label {
+    color: var(--profile-text-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.profile-info-item span {
+    color: var(--profile-text);
+    font-weight: 600;
+    text-align: right;
+    max-width: 60%;
+    word-break: break-word;
+}
+
+/* Grid de estadísticas */
+.profile-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--profile-border);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--profile-accent);
+    transform: translateY(-2px);
+}
+
+.stat-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--profile-accent), #7209b7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.stat-icon i {
+    color: white;
+    font-size: 1.2rem;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-number {
+    color: var(--profile-text);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.stat-label {
+    color: var(--profile-text-secondary);
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Footer del modal */
+.profile-modal-footer {
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--profile-border);
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+/* Botones del modal */
+.profile-modal-footer .btn {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
+
+.secondary-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--profile-text);
+    border: 1px solid var(--profile-border);
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--profile-text);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.danger-btn {
+    background: linear-gradient(135deg, var(--profile-danger), #dc2626);
+    color: white;
+    border: 1px solid var(--profile-danger);
+}
+
+.danger-btn:hover {
+    background: linear-gradient(135deg, #dc2626, var(--profile-danger));
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(248, 113, 113, 0.3);
+}
+
+/* Scrollbar personalizada para el modal */
+.profile-modal-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.profile-modal-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.profile-modal-content::-webkit-scrollbar-thumb {
+    background: var(--profile-accent);
+    border-radius: 3px;
+}
+
+.profile-modal-content::-webkit-scrollbar-thumb:hover {
+    background: #3aa8d8;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-modal-overlay {
+        padding: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .profile-modal-content {
+        width: 100%;
+        max-width: 400px;
+        transform: translateY(100%);
+    }
+    
+    .profile-modal-overlay.show .profile-modal-content {
+        transform: translateY(0);
+    }
+    
+    .profile-modal-header {
+        padding: 1.5rem 1.5rem 1rem;
+    }
+    
+    .profile-modal-body {
+        padding: 1rem 1.5rem;
+    }
+    
+    .profile-modal-footer {
+        padding: 1rem 1.5rem;
+        flex-direction: column;
+    }
+    
+    .profile-stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-modal-content {
+        margin: 0.5rem;
+        width: calc(100% - 1rem);
+    }
+    
+    .profile-info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .profile-info-item span {
+        max-width: 100%;
+        text-align: left;
+    }
+}

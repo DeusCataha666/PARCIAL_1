@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nexus Library - Librería futurista con tecnología avanzada</title>
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" />
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Orbitron:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <!-- CSS Personalizado -->
+  <link rel="stylesheet" href="/styles/style.css" />
+  <link rel="stylesheet" href="/styles/profile-modal.css" />
+</head>
+
+<body>
+  <div class="light-strip top"></div>
+  <div class="light-strip left"></div>
+  <div class="light-strip right"></div>
+  <div class="cart-overlay"></div>
+
+  <div id="header-container">
+    <!-- Header cargado dinámicamente -->
+  </div>
+
+  <main class="nexus-main container" role="main">
+
+    <section class="hero-section" role="region" aria-label="Presentación principal">
+
+      <div class="hero-content">
+
+        <h1 class="hero-title">
+          Descubre el <span class="highlight">futuro</span> de la lectura
+        </h1>
+        <p class="hero-subtitle">
+          Una experiencia inmersiva donde la tecnología y la literatura
+          convergen
+        </p>
+
+        <div class="hero-actions">
+          <button class="primary-btn btn" onclick="showCollectionModal()">
+            <i class="bi bi-collection"></i> Explorar colección
+          </button>
+
+          <button class="secondary-btn btn" onclick="showEventsModal()">
+            <i class="bi bi-calendar-check"></i> Próximos eventos
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <section class="carousel-section scroll-animation">
+      <div class="section-header">
+        <h2>Colección destacada</h2>
+      </div>
+      <div class="nexus-carousel position-relative overflow-hidden">
+        <div class="recommendations-container">
+          <!-- Libros generados dinámicamente con JS -->
+        </div>
+      </div>
+    </section>
+    
+    <template id="cards-template">
+      <div class="recommendation-card">
+        <img src="" alt="Portada del libro" class="book-cover" />
+        <div class="book-info">
+          <h3 class="book-title">Título del libro</h3>
+          <p class="book-author">Autor del libro</p>
+          <div class="book-meta">
+            <span class="book-category">Categoría</span>
+            <span class="book-rating">⭐⭐⭐⭐⭐</span>
+          </div>
+        </div>
+      </div>  
+    </template>
+   
+
+
+    <section class="features-section scroll-animation " role="region" aria-label="Características principales">
+      <div class="feature-card col-12 col-md-4">
+        <div class="feature-icon rounded-circle d-flex align-items-center justify-content-center mb-3">
+          <i class="bi bi-telephone-plus fs-3"></i>
+        </div>
+        <h3>Contacto</h3>
+        <p>Comunicate con nosotros a traves del correo: <a class="info-Correo" href="#">info@nexuslibrary.com</a> o deja
+          un comentario</p>
+      </div>
+
+      <div class="feature-card col-12 col-md-4">
+        <div class="feature-icon rounded-circle d-flex align-items-center justify-content-center mb-3">
+          <i class="bi bi-person-vcard fs-3"></i>
+        </div>
+        <h3>Membresia <span class="premium">VIP</span></h3>
+        <p>
+          Accede a contenido exclusivo, eventos privados y ofertas exclusivas.
+        </p>
+        <button class="btn primary-btn" style="margin-top: 1.3rem;" onclick="showMembershipModal()">Únete ahora</button>
+      </div>
+
+      <div class="feature-card col-12 col-md-4">
+        <div class="feature-icon rounded-circle d-flex align-items-center justify-content-center mb-3">
+          <i class="bi bi-chat-left-dots fs-3"></i>
+        </div>
+        <h3>Comunidad Nexus</h3>
+        <p>
+          Únete a nuestra comunidad de lectores y comparte tus opiniones y recomendaciones.
+        </p>
+
+        <button class="btn primary-btn" onclick="showDiscordModal()"> <i class="bi bi-discord"></i> Unirte</button>
+      </div>
+    </section>
+
+    <section class="newsletter-section scroll-animation" role="region" aria-label="Suscríbete a nuestro newsletter">
+      <div class="newsletter-container">
+        <div class="text">
+          <p id="two" class="fw-semibold">Tu curiosidad nos inspira</p>
+          <p id="three">Escríbenos sin temor para resolver tus dudas.</p>
+        </div>
+        <form class="newsletter-form" action="#" method="post" novalidate>
+          <div>
+            <label for="nombre" class="form-label visually-hidden">Nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+            <div class="invalid-feedback">Por favor, ingresa tu nombre.</div>
+          </div>
+          <div>
+            <label for="email" class="form-label visually-hidden">Email</label>
+            <input type="email" id="email" name="email" placeholder="Correo electrónico" required>
+            <div class="invalid-feedback">Por favor, ingresa un correo válido.</div>
+          </div>
+          <div>
+            <label for="telefono" class="form-label visually-hidden">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" pattern="[0-9]{10,15}" required>
+            <div class="invalid-feedback">Por favor, ingresa un teléfono válido.</div>
+          </div>
+          <div>
+            <label for="mensaje" class="form-label visually-hidden">Mensaje</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Mensaje" rows="1" required></textarea>
+            <div class="invalid-feedback">Por favor, escribe tu mensaje.</div>
+          </div>
+          <div>
+            <button type="submit" class="btn primary-btn px-4" id="contact-btn">¡Háblanos!</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal para detalles del libro -->
+  <div id="book-detail-modal" class="book-modal-overlay">
+    <div class="book-modal-content">
+      <button class="book-modal-close" aria-label="Cerrar modal">&times;</button>
+      <div class="book-modal-body">
+        <div class="book-modal-image">
+          <img id="modal-book-cover" src="" alt="Portada del libro" loading="lazy">
+        </div>
+        <div class="book-modal-info">
+          <h2 id="modal-book-title">Título del libro</h2>
+          <p class="modal-book-author" id="modal-book-author">Autor del libro</p>
+          <div class="modal-book-meta">
+            <span class="modal-book-category" id="modal-book-category">Categoría</span>
+            <span class="modal-book-year" id="modal-book-year">Año</span>
+            <div class="modal-book-rating" id="modal-book-rating">⭐⭐⭐⭐⭐</div>
+          </div>
+          <p class="modal-book-description" id="modal-book-description">Descripción del libro...</p>
+          <div class="modal-book-actions">
+            <button id="add-to-cart-btn" class="btn primary-btn modal-action-btn">
+              <i class="bi bi-cart-plus"></i> Agregar al carrito
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal del carrito de compras -->
+  <div id="cart-modal" class="book-modal-overlay">
+    <div class="cart-modal-content">
+      <button class="book-modal-close" aria-label="Cerrar carrito">&times;</button>
+      <div class="cart-modal-header">
+        <h2><i class="bi bi-cart3"></i> Tu Carrito de Compras</h2>
+      </div>
+      <div class="cart-modal-body">
+        <div id="cart-items-container" class="cart-items-container">
+          <!-- Los productos se cargarán dinámicamente -->
+        </div>
+        <div class="cart-empty" id="cart-empty" style="display: none;">
+          <i class="bi bi-cart-x"></i>
+          <h3>Tu carrito está vacío</h3>
+          <p>Agrega algunos libros para comenzar tu aventura de lectura</p>
+        </div>
+      </div>
+      <div class="cart-modal-footer">
+        <div class="cart-total">
+          <span class="cart-total-label">Total:</span>
+          <span class="cart-total-amount" id="cart-total-amount">$0.00</span>
+        </div>
+        <div class="cart-actions">
+          <button class="btn secondary-btn" onclick="closeCartModal()">
+            <i class="bi bi-arrow-left"></i> Seguir comprando
+          </button>
+          <button class="btn primary-btn" id="checkout-btn">
+            <i class="bi bi-credit-card"></i> <a class="btn-link" href="/pages/404.html">Proceder al pago</a>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Próximos Eventos -->
+  <div id="events-modal" class="book-modal-overlay">
+    <div class="book-modal-content">
+      <button class="book-modal-close" aria-label="Cerrar eventos">&times;</button>
+      <div class="events-modal-header">
+        <h2><i class="bi bi-calendar-event"></i> Próximos Eventos Nexus</h2>
+      </div>
+      <div class="events-modal-body">
+        <div class="events-list">
+          <div class="event-item">
+            <div class="event-date">
+              <span class="event-day">15</span>
+              <span class="event-month">ENE</span>
+            </div>
+            <div class="event-info">
+              <h3>Club de Lectura: Ciencia Ficción</h3>
+              <p>Únete a nuestra discusión mensual sobre los clásicos de la ciencia ficción. Este mes: "Fundación" de Isaac Asimov.</p>
+              <div class="event-meta">
+                <span><i class="bi bi-clock"></i> 19:00 - 21:00</span>
+                <span><i class="bi bi-geo-alt"></i> Sala Virtual Nexus</span>
+              </div>
+            </div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">
+              <span class="event-day">22</span>
+              <span class="event-month">ENE</span>
+            </div>
+            <div class="event-info">
+              <h3>Presentación de Autor: Cyberpunk 2025</h3>
+              <p>Conoce al autor del bestseller "Nexus Dreams" en una sesión exclusiva con preguntas y respuestas.</p>
+              <div class="event-meta">
+                <span><i class="bi bi-clock"></i> 18:00 - 19:30</span>
+                <span><i class="bi bi-geo-alt"></i> Auditorio Principal</span>
+              </div>
+            </div>
+          </div>
+          <div class="event-item">
+            <div class="event-date">
+              <span class="event-day">05</span>
+              <span class="event-month">FEB</span>
+            </div>
+            <div class="event-info">
+              <h3>Taller de Escritura Creativa</h3>
+              <p>Desarrolla tus habilidades narrativas con nuestros expertos en literatura futurista y ciencia ficción.</p>
+              <div class="event-meta">
+                <span><i class="bi bi-clock"></i> 16:00 - 18:00</span>
+                <span><i class="bi bi-geo-alt"></i> Laboratorio Creativo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-actions-footer">
+        <button class="btn primary-btn" onclick="window.location.href='/pages/404.html'">
+          <i class="bi bi-calendar-plus"></i> <a class="btn-link" href="/pages/404.html">
+          Ver todos los eventos </a>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Explorar Colección -->
+  <div id="collection-modal" class="book-modal-overlay">
+    <div class="book-modal-content">
+      <button class="book-modal-close" aria-label="Cerrar colección">&times;</button>
+      <div class="collection-modal-header">
+        <h2><i class="bi bi-collection"></i> Explora Nuestra Colección</h2>
+      </div>
+      <div class="collection-modal-body">
+        <div class="collection-categories">
+          <div class="category-card" onclick="filterByCategory('Ciberpunk')">
+            <div class="category-icon">
+              <i class="bi bi-cpu"></i>
+            </div>
+            <h3>Ciberpunk</h3>
+            <p>Explora mundos digitales y realidades alternativas</p>
+            <span class="category-count">120+ libros</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('Ciencia Ficción')">
+            <div class="category-icon">
+              <i class="bi bi-rocket"></i>
+            </div>
+            <h3>Ciencia Ficción</h3>
+            <p>Viaja a galaxias lejanas y futuros posibles</p>
+            <span class="category-count">200+ libros</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('Fantasía')">
+            <div class="category-icon">
+              <i class="bi bi-magic"></i>
+            </div>
+            <h3>Fantasía</h3>
+            <p>Sumérgete en mundos mágicos y épicos</p>
+            <span class="category-count">150+ libros</span>
+          </div>
+          <div class="category-card" onclick="filterByCategory('Distopía')">
+            <div class="category-icon">
+              <i class="bi bi-building"></i>
+            </div>
+            <h3>Distopía</h3>
+            <p>Reflexiona sobre futuros oscuros y sociedades</p>
+            <span class="category-count">80+ libros</span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-actions-footer">
+        <button class="btn secondary-btn" onclick="closeCollectionModal()">
+          <i class="bi bi-arrow-left"></i> Volver
+        </button>
+        <button class="btn primary-btn" onclick="window.location.href='/pages/catalogo.html'">
+          <i class="bi bi-grid-3x3"></i> <a class="btn-link" href="/pages/404.html">Ver catálogo completo</a>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Membresía VIP -->
+  <div id="membership-modal" class="book-modal-overlay">
+    <div class="book-modal-content">
+      <button class="book-modal-close" aria-label="Cerrar membresía">&times;</button>
+      <div class="membership-modal-header">
+        <h2><i class="bi bi-star-fill"></i> Membresía <span class="premium">VIP</span></h2>
+      </div>
+      <div class="membership-modal-body">
+        <div class="membership-plans">
+          <div class="plan-card featured">
+            <div class="plan-badge">Más Popular</div>
+            <h3>VIP Anual</h3>
+            <div class="plan-price">
+              <span class="price">$99</span>
+              <span class="period">/año</span>
+            </div>
+            <ul class="plan-features">
+              <li><i class="bi bi-check-circle-fill"></i> Acceso ilimitado a toda la colección</li>
+              <li><i class="bi bi-check-circle-fill"></i> Eventos exclusivos VIP</li>
+              <li><i class="bi bi-check-circle-fill"></i> Descuentos del 30% en libros físicos</li>
+              <li><i class="bi bi-check-circle-fill"></i> Acceso anticipado a nuevos lanzamientos</li>
+              <li><i class="bi bi-check-circle-fill"></i> Soporte prioritario 24/7</li>
+            </ul>
+            <button class="btn primary-btn plan-btn" onclick="window.location.href='/pages/404.html'">Elegir Plan Anual</button>
+          </div>
+          <div class="plan-card">
+            <h3>VIP Mensual</h3>
+            <div class="plan-price">
+              <span class="price">$12</span>
+              <span class="period">/mes</span>
+            </div>
+            <ul class="plan-features">
+              <li><i class="bi bi-check-circle-fill"></i> Acceso ilimitado a toda la colección</li>
+              <li><i class="bi bi-check-circle-fill"></i> Eventos exclusivos VIP</li>
+              <li><i class="bi bi-check-circle-fill"></i> Descuentos del 20% en libros físicos</li>
+              <li><i class="bi bi-check-circle-fill"></i> Soporte prioritario</li>
+            </ul>
+            <button class="btn secondary-btn plan-btn" onclick="window.location.href='/pages/404.html'">Elegir Plan Mensual</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Discord -->
+  <div id="discord-modal" class="book-modal-overlay">
+    <div class="book-modal-content">
+      <button class="book-modal-close" aria-label="Cerrar Discord">&times;</button>
+      <div class="discord-modal-header">
+        <h2><i class="bi bi-discord"></i> Únete a Comunidad Nexus</h2>
+      </div>
+      <div class="discord-modal-body">
+        <div class="discord-info">
+          <div class="discord-stats">
+            <div class="stat-item">
+              <div class="stat-number">2,847</div>
+              <div class="stat-label">Miembros activos</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">156</div>
+              <div class="stat-label">En línea ahora</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">24/7</div>
+              <div class="stat-label">Conversaciones</div>
+            </div>
+          </div>
+          <div class="discord-features">
+            <h3>¿Qué encontrarás en nuestra comunidad?</h3>
+            <ul>
+              <li><i class="bi bi-chat-dots"></i> Discusiones sobre libros y recomendaciones</li>
+              <li><i class="bi bi-calendar-event"></i> Eventos exclusivos y clubes de lectura</li>
+              <li><i class="bi bi-trophy"></i> Concursos y desafíos de lectura</li>
+              <li><i class="bi bi-people"></i> Conecta con lectores de todo el mundo</li>
+              <li><i class="bi bi-bell"></i> Notificaciones de nuevos lanzamientos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-actions-footer">
+        <button class="btn secondary-btn" onclick="closeDiscordModal()">
+          <i class="bi bi-arrow-left"></i> Tal vez después
+        </button>
+        <button class="btn primary-btn discord-join-btn" onclick="window.location.href='/pages/404.html'">
+          <i class="bi bi-discord"></i> <a class="btn-link" href="/pages/404.html">Unirme ahora</a>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alerta personalizada para el formulario -->
+  <div id="form-alert-overlay" class="form-alert-overlay">
+    <div id="form-alert" class="form-alert">
+      <div class="form-alert-header">
+        <div class="form-alert-icon">
+          <i class="bi bi-check-circle-fill"></i>
+        </div>
+        <div class="form-alert-content">
+          <h3>¡Mensaje Enviado!</h3>
+          <p>Gracias por contactarnos. Hemos recibido tu mensaje y te responderemos pronto.</p>
+        </div>
+      </div>
+      <div class="form-alert-actions">
+        <button class="form-alert-btn form-alert-primary" onclick="closeFormAlert()">
+          <i class="bi bi-check"></i> Perfecto
+        </button>
+        <button class="form-alert-btn form-alert-secondary" onclick="closeFormAlert()">
+          <i class="bi bi-arrow-left"></i> Volver
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer-container">
+    <!-- Footer cargado dinámicamente -->
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JS Personalizado -->
+  <script src="/Scripts/script.js"></script>
+</body>
+
+</html>

@@ -1,3 +1,5 @@
+# PARCIAL_1
+=======
 # 📚 NEXUS LIBRARY 
 
 ## 📋 Documentacion del Proyecto
@@ -143,6 +145,5 @@ PARCIAL_1/
 - **Responsive Design**: Funciona en todos los dispositivos
 
 ---
-
 
 
