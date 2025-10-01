@@ -358,7 +358,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   // Sistema de recomendaciones
   function getRecommendations() {
-    return booksData.sort((a, b) => b.rating - a.rating).slice(1, 8);
+    return booksData.sort((a, b) => b.rating - a.rating).slice(0, 12);
   }
 
   function displayRecommendations() {
